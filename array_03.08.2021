@@ -1,0 +1,34 @@
+#include <stdio.h>
+int main()
+{
+    int n,ctr=0,r1,r2,s;
+printf("Enter the number of elements: ");
+scanf("%d",&n);
+int ar[n];
+printf("\nEnter the elements: ");
+for(int i=0;i<n;i++)
+{
+    scanf("%d",&ar[i]);
+}
+printf("\nEnter the range: ");
+scanf("%d %d",&r1,&r2);
+printf("\nEnter the shifting value: ");
+scanf("%d",&s);
+int st[s];
+for(int j=r2-s+1;j<=r2;j++)
+{
+    st[ctr]=ar[j];
+    ctr++;
+}
+for(int i=r2-s;i>=r1;i--)
+{
+    ar[i+2]=ar[i];
+}
+for(int i=r1,ctr=0;i<=(r1+s) && ctr<s;i++,ctr++)
+{
+    ar[i]=st[ctr];
+}
+for(int i=0;i<n;i++)
+printf("%d ",ar[i]);
+    return 0;
+}

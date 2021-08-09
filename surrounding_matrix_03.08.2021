@@ -1,0 +1,48 @@
+#include<stdio.h>
+int main()
+{
+int m_429=0,n_429=0,p1_429=0,p2_429=0,sum_429=0;
+printf("Size of array m x n : ") ;
+scanf("%d%d",&m_429,&n_429);
+int a_429[m_429][n_429];
+printf("Elements of array : ") ;
+for(int i_429=0;i_429<m_429;i_429++)
+{
+   for(int j_429=0;j_429<n_429;j_429++)
+    {
+    scanf("%d",&a_429[i_429][j_429]);
+    }
+}
+printf("\n");
+
+for(int i_429=0;i_429<m_429;i_429++)
+{
+    for (int j_429=0;j_429<n_429;j_429++)
+    {
+    printf("%d " ,a_429[i_429][j_429]) ;
+    }
+    printf("\n") ;
+}
+
+printf("\nEnter Position: ");
+scanf("%d%d",&p1_429,&p2_429);
+printf("You chose:%d\n",a_429[p1_429][p2_429]);
+printf("Surrounding: ");
+for(int i_429=-1;i_429<=1;i_429++)
+{
+    for(int j_429=-1;j_429<=1;j_429++)
+    {
+      if((p1_429+i_429)>=0 && (p2_429+j_429)>=0 && (p1_429+i_429)<n_429 && (p2_429+j_429)<n_429)
+      {
+        if((p1_429+i_429)!=p1_429 || (p2_429+j_429)!=p2_429)
+        {
+         printf("%d " ,a_429[p1_429+i_429][p2_429+j_429]);
+         sum_429+=a_429[p1_429+i_429][p2_429+j_429];
+        }
+      }
+    }
+}
+printf("\nSum of surrounding elements is : %d \n",sum_429);
+return 0;
+}
+

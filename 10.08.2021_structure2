@@ -1,0 +1,45 @@
+#include <stdio.h>
+struct employee{
+char name[100];
+char gender[10];
+char depart[50];
+double basic;
+double da;
+double hr;
+double gross;
+};
+int main()
+{
+int n;
+printf("Enter the number of employees: ");
+scanf("%d",&n);
+struct employee s[n];
+for(int i=0;i<n;i++)
+{
+printf("\nEnter the name of employee %d:",(i+1));
+scanf("%s",s[i].name);
+printf("\nEnter the gender of employee %d:",(i+1));
+scanf("%s",s[i].gender);
+printf("\nEnter the department of employee %d:",(i+1));
+scanf("%s",s[i].depart);
+printf("\nEnter the basic salary of employee %d:",(i+1));
+scanf(" %lf",&s[i].basic);
+}
+for(int i=0;i<n;i++)
+{
+s[i].hr=(25*s[i].basic)/100;
+s[i].da=(75*s[i].basic)/100;
+s[i].gross=s[i].basic+s[i].hr+s[i].da;
+}
+for(int i=0;i<n;i++)
+{
+printf("\nNAME of employee %d: %s",(i+1),s[i].name);
+printf("\nGENDER of employee %d: %s",(i+1),s[i].gender);
+printf("\nDEPARTMENT of employee %d: %s",(i+1),s[i].depart);
+printf("\nBASIC SALARY of employee %d: %.2lf",(i+1),s[i].basic);
+printf("\nDA of employee %d: %.2lf",(i+1),s[i].da);
+printf("\nHRA of employee %d: %.2lf",(i+1),s[i].hr);
+printf("\nGROSS SALARY of employee %d: %.2lf\n\n",(i+1),s[i].gross);
+}
+return 0;
+}

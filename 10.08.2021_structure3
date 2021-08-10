@@ -1,0 +1,83 @@
+#include<stdio.h>
+struct student{
+    char name[100];
+    int roll;
+    int marks[5];
+    float tot,perc;
+    char grade;
+};
+void getdata(struct student s[],int n)
+{
+    for(int i=0;i<n;i++){
+    printf("\nEnter the name of the student: ");
+    scanf("%s",s[i].name);
+    printf("\nEnter the roll no.: ");
+    scanf(" %d",&s[i].roll);
+    printf("\nEnter the marks in 5 subjects: ");
+    for(int j=0;j<5;j++)
+    {
+     scanf("%d",&s[i].marks[j]);   
+    }
+    }
+}
+void cal(struct student s[],int n)
+{
+    for(int i=0;i<n;i++)
+    {   int sum=0;
+        for(int j=0;j<5;j++)
+        {
+            sum=sum+s[i].marks[j];
+            s[i].tot=sum;
+        }
+        s[i].perc=s[i].tot/5;
+        if(s[i].perc>=90 && s[i].perc<=100)
+         s[i].grade='O';
+        if(s[i].perc>=80 && s[i].perc<90)
+         s[i].grade='E';
+        if(s[i].perc>=70 && s[i].perc<80)
+         s[i].grade='A';
+        if(s[i].perc>=60 && s[i].perc<70)
+         s[i].grade='B';
+        if(s[i].perc>=50 && s[i].perc<60)
+         s[i].grade='C';
+        if(s[i].perc>=40 && s[i].perc<50)
+         s[i].grade='D';
+        if(s[i].perc<40)
+         s[i].grade='F';
+    }
+    for(int i=0;i<n;i++){
+        printf("\nPercentage of student %d is: %.2f",(i+1),s[i].perc);
+        printf("\nGrade of student %d is: %c",(i+1),s[i].grade);
+    }
+}
+void sort(struct student s[],int n)
+{
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=0;j<n-1;j++)
+        {
+            if(s[j+1].perc<s[j].perc)
+            {
+                int temp=s[j+1].perc;
+                s[j+1].perc=s[j].perc;
+                s[j].perc=temp;
+            }
+        }
+    }
+    printf("\nSorted array: ");
+    for(int i=0;i<n;i++)
+    {
+        printf("%f ",s[i].perc);
+    }
+}
+int main()
+{
+    int n;
+    printf("\nEnter the number of students: ");
+    scanf("%d",&n);
+    struct student s[n];
+    getdata(s,n);
+    cal(s,n);
+    sort(s,n);
+    return 0;
+}

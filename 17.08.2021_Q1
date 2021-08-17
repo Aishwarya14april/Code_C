@@ -1,0 +1,68 @@
+#include <stdio.h>
+struct employ_name{
+    char fname[50];
+    char mname[50];
+    char lname[50];
+};
+struct employ_dob{
+    int d;
+    int m;
+    int yr;
+};
+struct employ{
+    struct employ_name name;
+    struct employ_dob dob;
+    int acc;
+    float balance;
+};
+int main()
+{
+    int n;
+    printf("Enter the number of employees: ");
+    scanf("%d",&n);
+    struct employ s[n];
+    for(int i=0;i<n;i++)
+    {
+        printf("Enter the first name of employee %d: ",(i+1));
+        scanf("%s",s[i].name.fname);
+        printf("\nEnter the middle name of employee %d: ",(i+1));
+        scanf("%s",s[i].name.mname);
+        printf("\nEnter the last name of employee %d: ",(i+1));
+        scanf("%s",s[i].name.lname);
+        printf("Enter the date of birth of employee %d: ",(i+1));
+        scanf("%d:%d:%d",&s[i].dob.d,&s[i].dob.m,&s[i].dob.yr);
+        printf("Enter the account number of employee %d: ",(i+1));
+        scanf("%d",&s[i].acc);
+        printf("Enter the balance of employee %d: ",(i+1));
+        scanf("%f",&s[i].balance);
+    }
+    printf("Employees having balance less than $200 are:\n");
+    for(int i=0;i<n;i++)
+    {
+        if(s[i].balance<200)
+        {
+        printf("%s ",s[i].name.fname);
+        printf("%s ",s[i].name.mname);
+        printf("%s ",s[i].name.lname);
+        }
+    }
+    printf("Employees having balance more than $1000 are:\n");
+    for(int i=0;i<n;i++)
+    {
+        if(s[i].balance>1000)
+        {
+            s[i].balance=s[i].balance+100;
+            printf("NAME: ");
+            printf("%s ",s[i].name.fname);
+            printf("%s ",s[i].name.mname);
+            printf("%s ",s[i].name.lname);
+            printf("\nDATE OF BIRTH: ");
+            printf("%d :",s[i].dob.d);
+            printf("%d :",s[i].dob.m);
+            printf("%d ",s[i].dob.yr);
+            printf("\nNEW BALANCE: ");
+            printf("%f ",s[i].balance);
+        }
+    }
+    return 0;
+}

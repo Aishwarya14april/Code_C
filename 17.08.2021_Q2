@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+void getdata(int *a,int n)
+{
+    printf("Enter the elements of the array: ");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+}
+void insert(int *a,int n)
+{
+    int ind,elem;
+    getdata(a,n);
+    printf("Enter the index at which element needs to be inserted: ");
+    scanf("%d",&ind);
+    printf("\nEnter the element to be inserted: ");
+    scanf("%d",&elem);
+    a=(int*)realloc(a,n+sizeof(int));
+    for(int i=n-1;i>=ind;i--)
+    {
+        a[i+1]=a[i];
+    }
+    a[ind]=elem;
+    printf("\nNew array:");
+    for(int i=0;i<=n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+void insert_begin(int *a,int n)
+{
+    int elem;
+    getdata(a,n);
+    printf("\nEnter the element to be inserted: ");
+    scanf("%d",&elem);
+     a=(int*)realloc(a,n+sizeof(int));
+    for(int i=n-1;i>=0;i--)
+    {
+        a[i+1]=a[i];
+    }
+    a[0]=elem;
+    printf("\nNew array:");
+    for(int i=0;i<=n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+void insert_end(int *a,int n)
+{
+    int elem;
+    getdata(a,n);
+    printf("\nEnter the element to be inserted: ");
+    scanf("%d",&elem);
+     a=(int*)realloc(a,n+sizeof(int));
+    a[n]=elem;
+    printf("\nNew array:");
+    for(int i=0;i<=n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+int main()
+{
+    int n,ch;
+    int *a;
+    printf("Enter the size of array: ");
+    scanf("%d",&n);
+    a=(int *)malloc(n*sizeof(int));
+    printf("Enter the choice number: ");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case(1):
+        getdata(a,n);
+        break;
+        case(2):
+        insert(a,n);
+        break;
+        case(3):
+        insert_begin(a,n);
+        break;
+        case(4):
+        insert_end(a,n);
+        break;
+    }
+    return 0;
+}

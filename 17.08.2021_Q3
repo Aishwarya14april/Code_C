@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+void getdata(int *a,int n)
+{
+    printf("Enter the elements of the array: ");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+}
+void delete(int *a,int n)
+{
+    int ind;
+    getdata(a,n);
+    printf("Enter the index at which element needs to be deleted: ");
+    scanf("%d",&ind);
+    for(int i=ind+1;i<n;i++)
+    {
+        a[i-1]=a[i];
+    }
+    a=(int*)realloc(a,n-sizeof(int));
+    printf("\nNew array:");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+void delete_specific(int *a,int n)
+{
+    int elem,index;
+    getdata(a,n);
+    printf("\nEnter the element to be deleted: ");
+    scanf("%d",&elem);
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]==elem)
+        index=i;
+    }
+    for(int i=index+1;i<n;i++)
+    {
+        a[i-1]=a[i];
+    }
+     a=(int*)realloc(a,n-sizeof(int));
+    printf("\nNew array:");
+    for(int i=0;i<=n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+void delete_begin(int *a,int n)
+{
+    int elem;
+    getdata(a,n);
+    for(int i=1;i<n;i++)
+    {
+        a[i-1]=a[i];
+    }
+     a=(int*)realloc(a,n-sizeof(int));
+    printf("\nNew array:");
+    for(int i=0;i<=n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+int main()
+{
+    int n,ch;
+    int *a;
+    printf("Enter the size of array: ");
+    scanf("%d",&n);
+    a=(int *)malloc(n*sizeof(int));
+    printf("Enter the choice number: ");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case(1):
+        getdata(a,n);
+        break;
+        case(2):
+        delete(a,n);
+        break;
+        case(3):
+        delete_specific(a,n);
+        break;
+        case(4):
+        delete_begin(a,n);
+        break;
+    }
+    return 0;
+}

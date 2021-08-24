@@ -2,6 +2,7 @@
 int main()
 {
     int x,y,n,r,c,val;
+    printf("Enter the no. of rows,columns and no. of non-zero values: ");
     scanf("%d %d %d",&x,&y,&n);
     int ar[x][y];
     int temp[x][y];
@@ -12,22 +13,24 @@ int main()
         ar[i][j]=0;
         }
     }
+    printf("\nEnter the rows,columns and values:\n");
     for(int i=0;i<n;i++)
     {
-        scanf("%d %d",&r,&c);
-        scanf("%d",&val);
+        scanf("%d %d %d",&r,&c,&val);
         ar[r][c]=val;
     }
-    printf("Array before transpose:\n");
+    printf("Sparse matrix before transpose:\n");
     for(int i=0;i<x;i++)
     {
         for(int j=0;j<y;j++)
         {
-        printf("%d ",ar[i][j]);
+            if(ar[i][j]!=0)
+            {
+            printf("%d %d %d\n",i,j,ar[i][j]);
+            }
         }
-        printf("\n");
     }
-    printf("Array after transpose:\n");
+    printf("Sparse matrix after transpose:\n");
     for(int i=0;i<x;i++)
     {
         for(int j=0;j<y;j++)
@@ -39,9 +42,11 @@ int main()
     {
         for(int j=0;j<x;j++)
         {
-            printf("%d ",temp[i][j]);
+           if(temp[i][j]!=0)
+            {
+            printf("%d %d %d\n",i,j,temp[i][j]);
+            }
         }
-        printf("\n");
     }
     return 0;
 }

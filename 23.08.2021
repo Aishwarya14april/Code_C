@@ -1,27 +1,44 @@
 #include<stdio.h>
 int main()
 {
-    int n,m,size;
+    int n,m,size,ch;
+    printf("Enter the order of 1st polynomial: ");
     scanf("%d",&n);
     int ar[n];
+    printf("\nEnter the coefficients of 1st polynomial: ");
     for(int i=0;i<n;i++)
+    {
     scanf("%d",&ar[i]);
+    }
+    printf("Enter the order of 2nd polynomial: ");
     scanf("%d",&m);
     int st[m];
+    printf("\nEnter the coefficients of 2nd polynomial: ");
     for(int i=0;i<m;i++)
+    {
     scanf("%d",&st[i]);
-    if(n>m)size=n;
+    }
+    if(n>m)
+    size=n;
     else size=m;
     int temp[size];
+    printf("\nEnter the choice: ");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1:
     for(int i=0;i<n;i++)
     {
         temp[i]=ar[i]+st[i];
     }
+    printf("\nAddition of two polynomials: ");
     for(int i=0;i<n;i++)
     {
         printf("%dx^%d ",temp[i],i);
     }
-    printf("\n");
+    break;
+    case 2:
+    printf("\nSubtracting the 2nd polynomial from the first: ");
     for(int i=0;i<n;i++)
     {
         temp[i]=ar[i]-st[i];
@@ -30,7 +47,9 @@ int main()
     {
         printf("%dx^%d ",temp[i],i);
     }
-    printf("\n");
+    break;
+    case 3:
+    printf("\nMultiplying the polynomials: ");
     int pro[n+m-1];
     for(int i=0;i<n;i++)
     {
@@ -51,6 +70,8 @@ int main()
     for(int i=0;i<ctr;i++)
     {
             printf("%dx^%d ",pro[i],i);
+    }
+    break;
     }
     return 0;
 }

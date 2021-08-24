@@ -2,7 +2,7 @@
 int main()
 {
     int n,m,size,ch;
-    printf("Enter the order of 1st polynomial: ");
+    printf("Enter the size of 1st polynomial: ");
     scanf("%d",&n);
     int ar[n];
     printf("\nEnter the coefficients of 1st polynomial: ");
@@ -10,7 +10,7 @@ int main()
     {
     scanf("%d",&ar[i]);
     }
-    printf("Enter the order of 2nd polynomial: ");
+    printf("Enter the size of 2nd polynomial: ");
     scanf("%d",&m);
     int st[m];
     printf("\nEnter the coefficients of 2nd polynomial: ");
@@ -22,6 +22,7 @@ int main()
     size=n;
     else size=m;
     int temp[size];
+    printf("\n1:Addition\n2:Subtraction\n3:Multiplication");
     printf("\nEnter the choice: ");
     scanf("%d",&ch);
     switch(ch)

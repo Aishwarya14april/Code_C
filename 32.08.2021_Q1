@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    char name[50];
+    char fname[50];
+    int ph;
+    char loc[50];
+    char branch;
+    struct node *next;
+};
+void display(struct node *a)
+{
+    for(;a!=NULL;a=a->next)
+    {
+    printf("\nNAME:%s ",a->name);
+    printf("\nFATHER's NAME: %s ",a->fname);
+    printf("\nPHONE NO: %d ",a->ph);
+    printf("\nLOCATION: %s ",a->loc);
+    }
+}
+int main()
+{
+    struct node *head=NULL,*h1=NULL,*h2=NULL;
+    struct node *cur,*ptr,*ll1,*ll2;
+    while(1)
+    {
+        char ans;
+        cur=(struct node *)malloc(sizeof(struct node));
+        printf("\nEnter name of student: ");
+        scanf("%s",cur->name);
+        printf("\nEnter name of father of the student: ");
+        scanf("%s",cur->fname);
+        printf("\nEnter phone no.: ");
+        scanf(" %d",&cur->ph);
+        printf("\nEnter branch: ");
+        scanf(" %c",&cur->branch);
+        printf("\nEnter location: ");
+        scanf("%s",cur->loc);
+        cur->next=NULL;
+        if(head==NULL)
+        head=cur;
+        else if(cur->branch=='C'|| cur->branch=='c')
+        {
+            cur->next=head;
+            head=cur;
+        }
+        else if(cur->branch=='I'|| cur->branch=='i')
+        {
+            ptr=head;
+            while(ptr->next!=NULL)
+            {
+                ptr=ptr->next;
+            }
+            ptr->next=cur;
+        }
+        printf("\nDo you want to enter information for more students? Y/N: ");
+        scanf(" %c",&ans);
+        if(ans=='Y'|| ans=='y')
+        continue;
+        else break;
+    }
+    ptr=head;
+    h1=head;
+    while(ptr->branch!='I'||ptr->branch!='i')
+    {
+        ll1=(struct node *)malloc(sizeof(struct node));
+        ll1=ptr;
+        ptr=ptr->next;
+        h2=ptr->next;
+    }
+    while(ptr->branch=='I'|| ptr->branch=='i' && ptr!=NULL)
+    {
+        ll2=(struct node *)malloc(sizeof(struct node));
+        ll2=ptr;
+        ptr=ptr->next;
+    }
+    char ch;
+    printf("\n1: Display details of CSE branch\n2:Display details of IT branch\nEnter choice: ");
+    scanf("%c",&ch);
+    switch(ch)
+    {
+        case 1:
+    display(h1);
+    break;
+    case 2:
+    display(h2);
+    break;
+    deafult:
+    printf("\nWrong choice");
+    }
+    return 0;
+}

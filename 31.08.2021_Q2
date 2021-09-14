@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node
+{
+    char name[50];
+    char type;
+    long ph;
+    struct node *next;
+};
+void del(struct node **h,char val)
+{
+	struct node *ptr,*ll1,*hh1,*count,*prv;
+	if(*h==NULL)
+	printf("\nList is empty");
+	else
+	{
+		ptr=*h;
+		while(ptr!=NULL)
+		{
+			if(ptr->type==val)
+			{
+			ll1=(struct node *)malloc(sizeof(struct node));
+			strcpy(ll1->name,ptr->name);
+			ll1->ph=ptr->ph;
+			ll1->next=NULL;
+			if(hh1==NULL)
+			{
+				hh1=ll1;
+				count=ll1;
+			}
+			else
+			{
+				count->next=ll1;
+				count=ll1;
+			}
+			break;
+		    }
+			else {
+				prv=ptr;
+				ptr=ptr->next;
+			}
+		}
+		if(ptr=NULL)
+		printf("\nData not found");
+		else if(ptr=*h)
+		{
+			*h=ptr->next;
+			free(ptr);
+		}
+		else{
+			prv->next=ptr->next;
+			free(ptr);
+		}
+	}
+}
+int main()
+{
+	struct node *head=NULL,*h1=NULL,*h2=NULL;
+    struct node *cur,*ptr;
+    while(true)
+    {
+        char ans;
+        cur=(struct node *)malloc(sizeof(struct node));
+        printf("\nEnter name: ");
+        scanf("%s",cur->name);
+        printf("\nEnter type of participant: ");
+        scanf(" %c",&cur->type);
+        printf("\nEnter phone no.: ");
+        scanf(" %ld",&cur->ph);
+        cur->next=NULL;
+        if(head==NULL)
+        {
+        head=cur;
+        ptr=cur;
+        }
+        else
+        {
+            ptr->next=cur;
+            ptr=cur;
+        }
+        printf("\nDo you want to enter information for more people? Y/N: ");
+        scanf(" %c",&ans);
+        if(ans=='Y'|| ans=='y')
+        continue;
+        else break;
+    }
+    del(&head,'S');
+    del(&head,'G');
+    del(&head,'O');
+    del(&head,'D');
+    return 0;
+}

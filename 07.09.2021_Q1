@@ -2,85 +2,171 @@
 #include<stdlib.h>
 struct node
 {
-    int cabin_no;
+    int cabin;
     char status;
     char name[50];
-    char disease[50];
     char gender;
+    char disease[50];
     struct node *next;
 };
+void insert(struct node **head)
+{
+    struct node *cur,*ptr;
+    cur=(struct node *)malloc(sizeof(struct node *));
+    cur->next=NULL;
+    printf("\nEnter cabin number: ");
+    scanf(" %d",&cur->cabin);
+    printf("\nEnter cabin status: ");
+    scanf(" %c",&cur->status);
+    if(cur->status=='Y')
+    {
+    printf("\nEnter name of patient: ");
+    scanf("%s",cur->name);
+    printf("\nEnter the gender of the patient: ");
+    scanf(" %c",&cur->gender);
+    printf("\nEnter the disease of the patient: ");
+    scanf("%s",cur->disease);
+    }
+    if(*head==NULL)
+    {
+        *head=cur;
+    }
+    else
+    {
+        ptr=*head;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=cur;
+    }
+}
 struct node *head=NULL;
 int main()
 {
-    int n;
-    struct node *cur;
-    printf("\nEnter the value of n: ");
-    scanf("%d",&n);
-    for(int i=0;i<n;i++){
-        struct node *ptr;
-        cur=malloc(sizeof(struct node));
-        cur->next=NULL;
-        printf("\nEnter the cabin number of the patient: ");
-        scanf(" %d",&cur->cabin_no);
-        printf("\nStatus-\nY-Occupied,N-Not Occupied");
-        printf("\nEnter the status: ");
-        scanf(" %c",&cur->status);
-        printf("\nEnter the gender of the patient: ");
-        scanf(" %c",&cur->gender);
-        printf("\nEnter the name of the patient: ");
-        scanf("%s",cur->name);
-        printf("\nEnter the disease: ");
-        scanf("%s",cur->disease);
-        if(head=NULL)
-        {
-            head=cur;
-            ptr=cur;
-        }
-        else if(cur->gender=='F'){
-            ptr->next=cur;
-            ptr=cur;
-        }
-        else if(cur->gender=='M')
-        {
-            ptr->next->next=cur;
-            ptr->next=cur;
-        }
-    }
-    printf("\nDo you have any requests?\n1:Admission Request\n2:Discharge Request");
-    scanf("%d",&n);
-    switch(n)
+    int n,cn,r;
+    while(n!=-1)
     {
-        case 1:
-        ptr=head;
-        for(;ptr!=NULL;ptr=ptr->next)
-        {
-            if(ptr->cabin=='N' && ptr->cabin_no%2!=0)
-            {
-                printf("Enter the name of patient: ");
-                scanf("%s",ptr->name);
-                printf("\nEnter the disease: ");
-                scanf("%s",ptr->disease);
-                ptr->status='Y';
-                ptr->gender='M';
-                ctr++;
-                break;
-            }
-            else if(ptr->cabin='N' && ptr->cabin_no%2==0)
-            {
-                printf("Enter the name of patient: ");
-                scanf("%s",ptr->name);
-                printf("\nEnter the disease: ");
-                scanf("%s",ptr->disease);
-                ptr->status='Y';
-                ptr->gender='F';
-                ctr++;
-                break;
-            }
-        }
-        if(ctr==0)
-        {
-            printf("\nSorry, Cabin isn't available at this moment\nYou are being shifted to the waiting list.");
-            
-        }
+    insert(&head);
+    printf("\nEnter -1 to exit: ");
+    scanf(" %d",&n);
     }
+    printf("\nEnter request\n1:Admission request\n2:Discharge request\n");
+    scanf("%d",&r);
+    if(r==1)
+        {
+            struct node *ptr=head;
+            int count=0;
+            char gen;
+            printf("\nEnter gender of patient: ");
+            scanf(" %c",&gen);
+            while(ptr!=NULL)
+            {
+                if(ptr->status=='N')
+                {
+                    if(gen=='M' && ptr->cabin%2!=0)
+                    {
+                        printf("\nEnter name of patient: ");
+                        scanf("%s",ptr->name);
+                        printf("\nEnter the disease of patient: ");
+                        scanf("%s",ptr->disease);
+                        ptr->status='Y';
+                        ptr->gender='M';
+                        break;
+                    }
+                    else if(gen=='F' && ptr->cabin%2==0)
+                    {
+                        printf("\nEnter name of patient: ");
+                        scanf("%s",ptr->name);
+                        printf("\nEnter the disease of the patient: ");
+                        scanf("%s",ptr->disease);
+                        ptr->status='Y';
+                        ptr->gender='M';
+                        break;
+                    }
+                    count++;
+                }
+                else ptr=ptr->next;
+            }
+            if(count==0)
+            {
+            printf("\nSorry!!!cabin isn't available\nYou are being shifted to the waiting list");
+            if(gen=='M')
+            {
+                struct node *cur,*h1=NULL;
+                cur=(struct node *)malloc(sizeof(struct node *));
+                cur->next=NULL;
+                printf("\nEnter name of patient: ");
+                scanf("%s",cur->name);
+                cur->gender=gen;
+                printf("\nEnter disease of patient: ");
+                scanf("%s",cur->disease);
+                if(h1==NULL)
+                {
+                    h1=cur;
+                }
+                else
+                {
+                ptr=h1;
+                while(ptr->next!=NULL)
+                {
+                    ptr=ptr->next;
+                }
+                ptr->next=cur;
+                }
+            }
+            else if(gen=='F')
+            {
+                struct node *cur,*h2=NULL;
+                cur=(struct node *)malloc(sizeof(struct node *));
+                cur->next=NULL;
+                printf("\nEnter name of patient: ");
+                scanf("%s",cur->name);
+                cur->gender=gen;
+                printf("\nEnter disease of patient: ");
+                scanf("%s",cur->disease);
+                if(h2==NULL)
+                {
+                    h2=cur;
+                }
+                else
+                {
+                ptr=h2;
+                while(ptr->next!=NULL)
+                {
+                    ptr=ptr->next;
+                }
+                ptr->next=cur;
+                }
+            }
+            }
+        }
+        // case 2:
+        // {
+        else if(r==2)
+        {
+            struct node *ptr,*h1,*h2;
+            printf("Enter the cabin no. to be discharged: ");
+            scanf(" %d",&cn);
+            for(ptr=head;ptr!=NULL;ptr=ptr->next)
+            {
+                if(ptr->cabin==cn)
+                {
+                    ptr->status='N';
+                    if(ptr->cabin%2==0 && h2!=NULL)
+                    {
+                        ptr=h2;
+                        h2=h2->next;
+                        free(h2);
+                    }
+                    else if(ptr->cabin%2!=0 && h1!=NULL)
+                    {
+                        ptr=h1;
+                        h1=h1->next;
+                        free(h1);
+                    }
+                }
+            }
+        }
+    return 0;
 }

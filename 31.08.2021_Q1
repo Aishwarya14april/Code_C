@@ -2,119 +2,96 @@
 #include<stdlib.h>
 struct node
 {
-    char name[50];
-    char fname[50];
-    long ph;
-    char loc[50];
-    char branch;
-    struct node *next;
+  char name[50];
+  char fname[50];
+  char loc[50];
+  int ph;
+  char dept;
+  struct node *next;
 };
-void display(struct node *a)
+void insert (struct node **head)
 {
-    for(;a!=NULL;a=a->next)
+  struct node *cur,*ptr;
+  cur = (struct node *) malloc (sizeof (struct node *));
+  cur->next = NULL;
+  printf("\nEnter name: ");
+  scanf ("%s", cur->name);
+  printf("\nEnter father's name: ");
+  scanf ("%s", cur->fname);
+  printf("\nEnter location: ");
+  scanf ("%s", cur->loc);
+  printf("\nEnter phone no: ");
+  scanf (" %d", &cur->ph);
+  printf("\nEnter department: ");
+  scanf (" %c", &cur->dept);
+  if (*head == NULL)
     {
-    printf("\nNAME:%s ",a->name);
-    printf("\nFATHER's NAME: %s ",a->fname);
-    printf("\nPHONE NO: %ld ",a->ph);
-    printf("\nLOCATION: %s ",a->loc);
+      *head = cur;
+    }
+  else if (cur->dept == 'C')
+  {
+    cur->next = *head;
+    *head = cur;
+  }
+else if (cur->dept == 'I')
+  {
+    ptr=*head;
+    while(ptr->next!=NULL)
+    {
+        ptr=ptr->next;
+    }
+    ptr->next = cur;
+  }
+}
+void display(struct node *head)
+{
+    printf("\nINFORMATION REGARDING CSE STUDENTS");
+    while(head!=NULL)
+    {
+        printf("\nNAME: %s",head->name);
+        printf("\nFATHER'S NAME: %s",head->fname);
+        printf("\nLOCATION: %s",head->loc);
+        printf("\nPHONE NO.: %d",head->ph);
+        head=head->next;
     }
 }
-struct node * split(struct node *h1)
+void display2(struct node *h)
 {
-    struct node *ptr,*ll1,*h2;
-    while(ptr->branch!='I'||ptr->branch!='i')
+    printf("\nINFORMATION REGARDING IT STUDENTS");
+    while(h!=NULL)
     {
-        ll1=(struct node *)malloc(sizeof(struct node));
-        ll1->next=NULL;
-        if(h1==NULL)
-        {
-            h1=ll1;
-            ptr=ll1;
-        }
-        else{
-            ptr->next=ll1;
-            ptr=ll1;
-        }
-        h2=ptr->next;
-    }
-    return h2;
-}
-void split2(struct node *h2)
-{
-    struct node *ptr,*ll2;
-    while(ptr->branch=='I'||ptr->branch=='i' && ptr!=NULL)
-    {
-        ll2=(struct node *)malloc(sizeof(struct node));
-        ll2->next=NULL;
-        if(h2==NULL)
-        {
-            h2=ll2;
-            ptr=ll2;
-        }
-        else{
-            ptr->next=ll2;
-            ptr=ll2;
-        }
-        h2=ptr->next;
+        printf("\nNAME: %s",h->name);
+        printf("\nFATHER'S NAME: %s",h->fname);
+        printf("\nLOCATION: %s",h->loc);
+        printf("\nPHONE NO.: %d",h->ph);
+        h=h->next;
     }
 }
-int main()
+struct node *head;
+int main ()
 {
-    struct node *head=NULL,*h1=NULL,*h2=NULL;
-    struct node *cur,*ptr,*ll1,*ll2;
-    while(true)
+  struct node *head=NULL,*h;
+  int n;
+  while (n != -1)
     {
-        char ans;
-        cur=(struct node *)malloc(sizeof(struct node));
-        printf("\nEnter name of student: ");
-        scanf("%s",cur->name);
-        printf("\nEnter name of father of the student: ");
-        scanf("%s",cur->fname);
-        printf("\nEnter phone no.: ");
-        scanf(" %ld",&cur->ph);
-        printf("\nEnter branch: ");
-        scanf(" %c",&cur->branch);
-        printf("\nEnter location: ");
-        scanf("%s",cur->loc);
-        cur->next=NULL;
-        if(head==NULL)
-        head=cur;
-        else if(cur->branch=='C'|| cur->branch=='c')
-        {
-            cur->next=head;
-            head=cur;
-        }
-        else if(cur->branch=='I'|| cur->branch=='i')
-        {
-            ptr=head;
-            while(ptr->next!=NULL)
-            {
-                ptr=ptr->next;
-            }
-            ptr->next=cur;
-        }
-        printf("\nDo you want to enter information for more students? Y/N: ");
-        scanf("%c",&ans);
-        if(ans=='Y'|| ans=='y')
-        continue;
-        else break;
+      insert (&head);
+      printf("\nEnter any number to continue or -1 to exit: ");
+      scanf (" %d", &n);
+      if (n == -1)
+      {
+          break;
+      }
+      else continue;
     }
-    h1=head;
-    h2=split(h1);
-    split2(h2);
-    char ch;
-    printf("\n 1: Display details of CSE branch\n 2:Display details of IT branch\n Enter choice: ");
-    scanf(" %c",&ch);
-    switch(ch)
+    struct node *ptr=head,*prv;
+    while(ptr->dept!='I')
     {
-    case 1:
-    display(h1);
-    break;
-    case 2:
-    display(h2);
-    break;
-    deafult:
-    printf("\nWrong choice");
+        prv=ptr;
+        ptr=ptr->next;
     }
+    h=ptr;
+    prv->next=NULL;
+    display(head);
+    display2(h);
     return 0;
 }

@@ -1,0 +1,87 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+int stack[30],top=-1;
+struct node *head=NULL;
+void print(struct node *head)
+{
+    struct node *ptr=head;
+    for(;ptr!=NULL;ptr=ptr->next)
+    {
+        printf("%d ",ptr->data);
+    }
+}
+int printfromstack(int stack[]) {
+   printf("\nStack:\n");
+   while(top>=0) {
+      printf("%d ", stack[top--]);
+   }
+}
+void reverse(struct node **head)
+{
+    struct node *ptr=*head,*prv=NULL,*next=NULL;
+    while(ptr!=NULL)
+    {
+        next=ptr->next;
+        ptr->next=prv;
+        prv=ptr;
+        ptr=next;
+    }
+    *head=prv;
+}
+int intostack(struct node* head) {
+   printf("Linked list:\n");
+   while(head!=NULL) {
+      printf("%d ", head->data);
+      stack[++top] = head->data;
+      head = head->next;
+   }
+}
+void insert(struct node **head)
+{
+    struct node *cur;
+    cur=(struct node *)malloc(sizeof(struct node *));
+    cur->next=NULL;
+    printf("\nEnter the data: ");
+    scanf("%d",&cur->data);
+    if(*head==NULL)
+    {
+        *head=cur;
+    }
+    else{
+        struct node *ptr=*head;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=cur;
+    }
+}
+int main()
+{
+    int n,ch;
+    struct node *head=NULL;
+    printf("\nEnter the size: ");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+    insert(&head);
+    }
+    printf("Enter choice\n1.Reverse the linked list using change of the address\n2.Reverse the list by changing the value\n");
+    scanf("%d",&ch);
+    if(ch==1)
+    {
+    reverse(&head);
+    print(head);
+    }
+    else
+    {
+    intostack(head);
+    printfromstack(stack);
+    }
+    return 0;
+}

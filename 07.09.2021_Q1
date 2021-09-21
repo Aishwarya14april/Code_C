@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 struct node
 {
     int cabin;
@@ -16,7 +17,7 @@ void insert(struct node **head)
     cur->next=NULL;
     printf("\nEnter cabin number: ");
     scanf(" %d",&cur->cabin);
-    printf("\nEnter cabin status: ");
+    printf("\nEnter cabin status:\nY:Occupied\nN:Not Occupied\n ");
     scanf(" %c",&cur->status);
     if(cur->status=='Y')
     {
@@ -48,11 +49,11 @@ int main()
     while(n!=-1)
     {
     insert(&head);
-    printf("\nEnter -1 to exit: ");
+    printf("\nEnter -1 to exit or enter any other number to continue: ");
     scanf(" %d",&n);
     }
     printf("\nEnter request\n1:Admission request\n2:Discharge request\n");
-    scanf("%d",&r);
+    scanf(" %d",&r);
     if(r==1)
         {
             struct node *ptr=head;
@@ -81,14 +82,14 @@ int main()
                         printf("\nEnter the disease of the patient: ");
                         scanf("%s",ptr->disease);
                         ptr->status='Y';
-                        ptr->gender='M';
+                        ptr->gender='F';
                         break;
                     }
-                    count++;
+                    count=1;
                 }
                 else ptr=ptr->next;
             }
-            if(count==0)
+            if(count!=1)
             {
             printf("\nSorry!!!cabin isn't available\nYou are being shifted to the waiting list");
             if(gen=='M')
@@ -141,8 +142,6 @@ int main()
             }
             }
         }
-        // case 2:
-        // {
         else if(r==2)
         {
             struct node *ptr,*h1,*h2;
@@ -166,6 +165,21 @@ int main()
                         free(h1);
                     }
                 }
+            }
+        }
+        printf("\n\nMASTER LINKED LIST:\n");
+        for(;head!=NULL;head=head->next)
+        {
+            printf("\nCABIN NO: %d ",head->cabin);
+            if(head->status=='Y')
+            {
+            printf("\nNAME: %s ",head->name);
+            printf("\nDISEASE: %s ",head->disease);
+            printf("\nGENDER: %c ",head->gender);
+            }
+            else
+            {
+                printf("\nCABIN STATUS: %c",head->status);
             }
         }
     return 0;

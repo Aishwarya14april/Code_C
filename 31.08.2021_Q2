@@ -12,12 +12,12 @@ void insert(struct node **head)
     struct node *ptr,*cur;
     cur=(struct node *)malloc(sizeof(struct node *));
     cur->next=NULL;
+    printf("\nEnter name: ");
+    scanf("%s",cur->name);
     printf("\nEnter phone no: ");
     scanf(" %d",&cur->ph);
     printf("\nEnter type: ");
     scanf(" %c",&cur->type);
-    printf("\nEnter name: ");
-    scanf("%s",cur->name);
     if(*head==NULL)
     {
         *head=cur;
@@ -37,7 +37,7 @@ void display(struct node *h)
     printf("%d",h->ph);
     }
 }
-void delete(struct node **head,char x)
+void delete_node(struct node **head,char x)
 {
     struct node *ptr=*head,*cur,*h1,*prv;
     while(ptr!=NULL)
@@ -88,9 +88,9 @@ int main()
        }
       else continue;
     }
-    delete(&head,'S');
-    delete(&head,'G');
-    delete(&head,'O');
-    delete(&head,'D');
+    delete_node(&head,'S');
+    delete_node(&head,'G');
+    delete_node(&head,'O');
+    delete_node(&head,'D');
     return 0;
 }

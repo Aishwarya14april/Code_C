@@ -1,0 +1,26 @@
+struct node* addTwoLists (struct node* first, struct node* second)
+{
+struct node* res = NULL;
+struct node *temp, *prev = NULL;
+int borrow, diff, temp2=0;
+
+while (first != NULL || second != NULL)
+{
+diff = (first? first->data: 0) – (second? second->data: 0)- temp2 ;
+borrow = (diff < 0)? 10 : 0;
+if(diff<0) temp2=1;
+else temp2=0;
+diff=diff+borrow;
+temp = newNode(diff);
+if(res == NULL)
+res = temp;
+else
+prev->next = temp;
+
+
+prev = temp;
+if (first) first = first->next;
+if (second) second = second->next;
+}
+return res;
+}

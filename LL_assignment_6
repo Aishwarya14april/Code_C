@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+struct node *head=NULL,*cur,*ptr,*x;
+void print(struct node *h)
+{
+    if(h!=NULL){
+    printf("%d ",h->data);
+    return print(h->next);
+    }
+}
+void print2(struct node *h)
+{
+    if(h==NULL)
+    return;
+    return print2(h->next);
+    printf("%d ",h->data);
+}
+int main()
+{
+    int n=0;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        cur=(struct node *)malloc(sizeof(struct node *));
+        cur->next=NULL;
+        scanf("%d",&cur->data);
+        if(head==NULL)
+        {
+            head=cur;
+            ptr=cur;
+        }
+        else
+        {
+            ptr->next=cur;
+            ptr=cur;
+        }
+    }
+    print(head);
+    printf("\n");
+    print2(head);
+    return 0;
+}

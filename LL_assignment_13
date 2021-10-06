@@ -1,0 +1,14 @@
+struct node* recursiveReverseLL(struct node* first){
+
+   if(first == NULL) return NULL;
+
+   if(first->link == NULL) return first;
+
+   struct node* rest = recursiveReverseLL(first->link);
+
+   first->link->link = first;
+
+   first->link = NULL
+
+   return rest;
+}

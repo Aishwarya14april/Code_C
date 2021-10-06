@@ -1,0 +1,13 @@
+struct Node* getIntersection(struct Node* head1,
+                             struct Node* head2)
+{
+    struct Node* result = NULL;
+    struct Node* t1 = head1;
+    while (t1 != NULL) {
+        if (isPresent(head2, t1->data))
+            push(&result, t1->data);
+        t1 = t1->next;
+    }
+ 
+    return result;
+}

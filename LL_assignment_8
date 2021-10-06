@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void separate(struct node **h,int n)
+{
+    struct node *h2,*ptr=*h;
+    while(ptr!=NULL)
+    {
+        h2=ptr->next;
+        ptr->next=ptr->next->next;
+        ptr=ptr->next->next;
+    }
+    struct node *temp=h2;
+    while(temp!=NULL)
+    {
+        temp->next=temp->next->next;
+        temp=temp->next->next;
+    }
+    ptr=*h;
+    while(ptr!=NULL)
+    {
+        ptr=ptr->next;
+    }
+    ptr->next=temp;
+}
+int main()
+{
+    struct node *cur,*head,*ptr;
+    int n=0,size=0;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        cur=(struct node *)malloc(sizeof(struct node *));
+        cur->next=NULL;
+        scanf("%d",&cur->data);
+        if(head==NULL)
+        {
+            head=cur;
+            ptr=cur;
+        }
+        else
+        {
+            ptr->next=cur;
+            ptr=cur;
+        }
+    }
+    separate(&head,n);
+    return 0;
+}

@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void reverse(struct node **h,int size,int n)
+{
+    int ctr=0;
+    struct node *ptr;
+    int inter=n/size;
+    for(ptr=*h;ptr!=NULL;ptr=ptr->next)
+    {
+        ++ctr;
+        if(ctr<=size)
+        {
+        struct node* prev = NULL;
+        struct node* current = *h;
+        struct node* next = NULL;
+        while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    *h = prev;
+    ctr=0;
+    break;
+        }
+    }
+}
+int main()
+{
+    struct node *cur,*head,*ptr;
+    int n=0,size=0;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        cur=(struct node *)malloc(sizeof(struct node *));
+        cur->next=NULL;
+        scanf("%d",&cur->data);
+        if(head==NULL)
+        {
+            head=cur;
+            ptr=cur;
+        }
+        else
+        {
+            ptr->next=cur;
+            ptr=cur;
+        }
+    }
+    scanf("%d",&size);
+    reverse(&head,size,n);
+    return 0;
+}

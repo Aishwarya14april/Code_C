@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+struct node *head=NULL,*cur,*ptr,*x;
+void check(struct node **h,int n)
+{
+    int temp=0,ctr=0;
+    if(n%2==0)
+    temp=n/2;
+    else temp=((n+1)/2)+1;
+    for(ptr=*h;ptr->next!=NULL;ptr=ptr->next)
+    {
+        ctr++;
+        if(ctr==temp)
+        {
+            x=ptr;
+        }
+    }
+    struct node *ptr1=*h,*ptr2=x;
+    while(ptr2!=NULL)
+    {
+        if(ptr1!=ptr2)
+        {
+            break;
+            ctr++;
+        }
+        ptr1=ptr1->next;
+        ptr2=ptr2->next;
+    }
+    if(ctr>0)
+    printf("NOT PALINGDROME");
+}
+int main()
+{
+    int n=0;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        cur=(struct node *)malloc(sizeof(struct node *));
+        cur->next=NULL;
+        scanf("%d",&cur->data);
+        if(head==NULL)
+        {
+            head=cur;
+            ptr=cur;
+        }
+        else
+        {
+            ptr->next=cur;
+            ptr=cur;
+        }
+    }
+    check(&head,n);
+    return 0;
+}

@@ -1,0 +1,39 @@
+
+void generate_evenodd(struct node *list, struct node **head)
+{
+    struct node *even = NULL, *odd = NULL, *temp;
+    struct node *reven, *rodd;
+    while (list != NULL)
+    {
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp->num = list->num;
+        temp->next = NULL;
+        if (list->num % 2 == 0)
+        {
+            if (even == NULL)
+            {
+                even = temp;
+            }
+            else
+            {
+                reven->next = temp;
+            }
+            reven = temp;
+        }
+        else
+        {
+            if (odd == NULL)
+            {
+                odd = temp;
+            }
+            else
+            {
+                rodd->next = temp;
+            }
+            rodd = temp;
+        }
+        list = list->next;
+    }
+    reven->next = odd;
+    *head = even;
+}

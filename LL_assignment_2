@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+struct node *head=NULL,*cur,*ptr;
+void swap(struct node **h,int n)
+{
+    struct node *temp=*h,*ptr;
+    int tot=0,count=0;
+    for(ptr=*h;ptr!=NULL;ptr=ptr->next)
+    {
+        tot++;
+    }
+    n=tot-n+1;
+    for(ptr=*h;ptr!=NULL;ptr=ptr->next)
+    {
+    ++count;
+    if(count==n)
+    {
+    printf("Nth node from the end is: %d",ptr->data);
+    }
+    }
+}
+int main()
+{
+    int n=0;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        cur=(struct node *)malloc(sizeof(struct node *));
+        cur->next=NULL;
+        scanf("%d",&cur->data);
+        if(head==NULL)
+        {
+            head=cur;
+            ptr=cur;
+        }
+        else
+        {
+            ptr->next=cur;
+            ptr=cur;
+        }
+    }
+    printf("Enter the nth node from the end: ");
+    scanf("%d",&n);
+    swap(&head,n);
+    return 0;
+}

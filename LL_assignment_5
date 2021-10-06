@@ -19,6 +19,7 @@ void check(struct node **h,int n)
             x=ptr;
         }
     }
+    ctr=0;
     struct node *ptr1=*h,*ptr2=x;
     while(ptr2!=NULL)
     {
@@ -32,6 +33,7 @@ void check(struct node **h,int n)
     }
     if(ctr>0)
     printf("NOT PALINGDROME");
+    else printf("PALINGDROME");
 }
 int main()
 {
